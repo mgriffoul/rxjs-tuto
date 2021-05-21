@@ -6,7 +6,7 @@ import {
   take,
   map,
   reduce,
-  merge
+  merge, mergeWith
 } from 'rxjs/operators';
 
 /* 
@@ -148,8 +148,12 @@ console.log('\n');
 const myAlphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
 const myAlphabet$ = from(myAlphabet);
 
-console.log('%c MERGE d\observable', 'color: yellow');
+console.log('%c MERGE dobservable', 'color: yellow');
 streamOfNumber$.pipe(merge(myAlphabet$)).subscribe(response => {
   console.log('%c ' + response, 'color: yellow');
 });
 console.log('\n');
+
+const new$ = myAlphabet$.pipe(mergeWith(streamOfNumber$)).subscribe(response => {
+  console.log('%c ' + response, 'color: yellow');
+});
